@@ -1,0 +1,140 @@
+/* App.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.list {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+}
+
+.list h2 {
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.beautiful-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.beautiful-list li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.beautiful-list li:last-child {
+  border-bottom: none;
+}
+
+.beautiful-list li:hover {
+  background-color: #f5f5f5;
+}
+
+.form {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form h2 {
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.form img {
+  max-width: 400px;
+  max-height: 400px; /* Set a maximum height for the image */
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination button:disabled {
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+}
+
+.update-button-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.update-button-container button {
+  padding: 12px 24px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.update-button-container button:hover {
+  background-color: #0056b3;
+}
+
+.update-button-container button:disabled {
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+}
+
+.page-number {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Media query to adjust layout for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .list,
+  .form {
+    min-width: unset;
+  }
+}

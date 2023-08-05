@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  t-client:
+    build: ./t-client
+    ports:
+      - "8080:3000"
+    depends_on:
+      - data-access
+
+  data-access:
+    build: ./data-access
+    ports:
+      - "3001:3001"
