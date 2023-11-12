@@ -1,27 +1,18 @@
-import axios from "axios";
-import { Pool } from "pg";
 import { callDBUpdate } from "./api-access/sreality";
-
-const sourceAPI = 'https://www.sreality.cz/api/cs/v2/estates?category_main_cb=1&category_type_cb=1&page=2&per_page=500&tms=1690834114009';
-
-const pool = new Pool({
-  user: "main",
-  host: "dpg-cj4hicdgkuvsl0cd5bog-a.frankfurt-postgres.render.com",
-  database: "estate",
-  password: "O48h7DzohJtNNZyAmSbgWuCPhXjfXDSf",
-  port: 5432,
-  ssl: true,
-});
+import { pool } from "./db-setup";
 
 export const getFlats = () => {
   return new Promise(function (resolve, reject) {
-    pool.query("SELECT * FROM flats ORDER BY id ASC", (error: any, results: { rows: unknown; }) => {
-      if (error) {
-        reject(error);
+    pool.query(
+      "SELECT * FROM flats ORDER BY id ASC",
+      (error: any, results: { rows: unknown }) => {
+        if (error) {
+          reject(error);
+        }
+        console.log(error);
+        resolve(results.rows);
       }
-      console.log(error);
-      resolve(results.rows);
-    });
+    );
   });
 };
 
@@ -31,16 +22,20 @@ const update = async () => {
 
     const newData = await callDBUpdate();
 
-    const insertPromises = newData.map(async (item: {title: string, img_url: string, note: string}) => {
+    for (const item of newData) {
       const queryText =
         "INSERT INTO flats (title, img_url, note) VALUES ($1, $2, $3) RETURNING *";
       const values = [item.title, item.img_url, item.note];
 
-      const result = await pool.query(queryText, values);
-      console.log(`A new flat has been added: ${result.rows[0]}`);
-    });
-
-    await Promise.all(insertPromises);
+      try {
+        const result = await pool.query(queryText, values);
+        console.log(
+          `A new flat has been added: ${JSON.stringify(result.rows[0])}`
+        );
+      } catch (error) {
+        console.error("Error inserting item:", error);
+      }
+    }
 
     console.log("All items inserted successfully!");
     return true;

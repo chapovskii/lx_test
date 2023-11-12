@@ -13,16 +13,10 @@ const initialState: InitialState = {
 };
 
 // Generates pending, fulfilled and rejected action types
-export const callUpdate = createAsyncThunk(
-  "record/callUpdate",
-  async () => {
-    const response = await axios.post(
-        `http://localhost:3001/flats/`,
-    );
-    console.log(response.data)
-    return response.data;
-  }
-);
+export const callUpdate = createAsyncThunk("record/callUpdate", async () => {
+  const response = await axios.post(`http://localhost:3001/flats/`);
+  return response.data;
+});
 
 const recordSlice = createSlice({
   name: "record",
@@ -33,7 +27,7 @@ const recordSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(
-        callUpdate.fulfilled,
+      callUpdate.fulfilled,
       (state, action: PayloadAction<boolean>) => {
         state.loading = false;
         state.records = action.payload;
@@ -49,5 +43,3 @@ const recordSlice = createSlice({
 });
 
 export default recordSlice.reducer;
-
-

@@ -6,7 +6,6 @@ export type Record = {
   title: string;
   img_url: string;
   note: string;
-
 };
 type InitialState = {
   totalCount: number;
@@ -18,7 +17,7 @@ const initialState: InitialState = {
   loading: false,
   records: [],
   error: "",
-  totalCount: 0
+  totalCount: 0,
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -27,9 +26,8 @@ export const fetchRecords = createAsyncThunk(
   async () => {
     const response = await axios.get(
       // `http://localhost:3001`,
-      `http://localhost:3001?_page=${1}&_limit=20`,
+      `http://localhost:3001?_page=${1}&_limit=20`
     );
-    console.log(response.data)
     return response.data;
   }
 );
@@ -59,5 +57,3 @@ const recordSlice = createSlice({
 });
 
 export default recordSlice.reducer;
-
-
